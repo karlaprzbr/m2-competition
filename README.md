@@ -7,13 +7,13 @@ Ce projet permet aux contributeurs de Lingua Libre d'écouter sans interruption 
 - HTML 5
 - CSS 3
 - JavaScript
-- PHP 8
 
 ### Frameworks :
+- Symfony 5.4
 - Bootstrap 5
 
 ### Libraries :
-- jQuery
+- 
 
 ## Installation :
 -
