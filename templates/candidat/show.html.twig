@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidat{% endblock %}
+
+{% block body %}
+    <h1>Candidat</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ candidat.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ candidat.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ candidat.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ candidat.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ candidat.description }}</td>
+            </tr>
+            <tr>
+                <th>Dispo</th>
+                <td>{{ candidat.dispo ? candidat.dispo|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TypeContrat</th>
+                <td>{{ candidat.typeContrat ? candidat.typeContrat|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Experience</th>
+                <td>{{ candidat.experience }}</td>
+            </tr>
+            <tr>
+                <th>Competences</th>
+                <td>{{ candidat.competences ? candidat.competences|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>SoftSkills</th>
+                <td>{{ candidat.softSkills ? candidat.softSkills|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>HardSkills</th>
+                <td>{{ candidat.hardSkills ? candidat.hardSkills|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>WorkView</th>
+                <td>{{ candidat.workView ? candidat.workView|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CompanyValues</th>
+                <td>{{ candidat.companyValues ? candidat.companyValues|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TeamSpirit</th>
+                <td>{{ candidat.teamSpirit ? candidat.teamSpirit|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Salaire</th>
+                <td>{{ candidat.salaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_candidat_index') }}">back to list</a>
+
+    <a href="{{ path('app_candidat_edit', {'id': candidat.id}) }}">edit</a>
+
+    {{ include('candidat/_delete_form.html.twig') }}
+{% endblock %}

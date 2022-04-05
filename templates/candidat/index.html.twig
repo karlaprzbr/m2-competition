@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidat index{% endblock %}
+
+{% block body %}
+    <h1>Candidat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Dispo</th>
+                <th>TypeContrat</th>
+                <th>Experience</th>
+                <th>Competences</th>
+                <th>SoftSkills</th>
+                <th>HardSkills</th>
+                <th>WorkView</th>
+                <th>CompanyValues</th>
+                <th>TeamSpirit</th>
+                <th>Salaire</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidat in candidats %}
+            <tr>
+                <td>{{ candidat.id }}</td>
+                <td>{{ candidat.nom }}</td>
+                <td>{{ candidat.prenom }}</td>
+                <td>{{ candidat.titre }}</td>
+                <td>{{ candidat.description }}</td>
+                <td>{{ candidat.dispo ? candidat.dispo|date('Y-m-d') : '' }}</td>
+                <td>{{ candidat.typeContrat ? candidat.typeContrat|join(', ') : '' }}</td>
+                <td>{{ candidat.experience }}</td>
+                <td>{{ candidat.competences ? candidat.competences|join(', ') : '' }}</td>
+                <td>{{ candidat.softSkills ? candidat.softSkills|join(', ') : '' }}</td>
+                <td>{{ candidat.hardSkills ? candidat.hardSkills|join(', ') : '' }}</td>
+                <td>{{ candidat.workView ? candidat.workView|join(', ') : '' }}</td>
+                <td>{{ candidat.companyValues ? candidat.companyValues|join(', ') : '' }}</td>
+                <td>{{ candidat.teamSpirit ? candidat.teamSpirit|join(', ') : '' }}</td>
+                <td>{{ candidat.salaire }}</td>
+                <td>
+                    <a href="{{ path('app_candidat_show', {'id': candidat.id}) }}">show</a>
+                    <a href="{{ path('app_candidat_edit', {'id': candidat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_candidat_new') }}">Create new</a>
+{% endblock %}
