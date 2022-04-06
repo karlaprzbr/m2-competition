@@ -31,6 +31,7 @@ class DiplomeController extends AbstractController
     public function new(Request $request, DiplomeRepository $diplomeRepository): Response
     {
         $diplome = new Diplome();
+        $diplome->setCandidat($this->getUser()->getCandidat());
         $form = $this->createForm(DiplomeType::class, $diplome);
         $form->handleRequest($request);
 

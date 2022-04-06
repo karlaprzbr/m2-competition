@@ -22,15 +22,23 @@
         <li class="nav-item">
             <a class="nav-link active text-white" aria-current="page" href="#">RANDSTAD</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-        </li>
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ dump('je passe ici') }}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('login') }}">Connexion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('register_index') }}">Inscription</a>
+            </li>
+        {% elseif is_granted('ROLE_CAN') %}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('app_candidat_show', {id:app.user.id}) }}">Espace candidat</a>
+            </li>
+        {% elseif is_granted('ROLE_ENT') %}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path('app_entreprise_show', {id:app.user.id}) }}">Espace entreprise</a>
+            </li>
+        {% endif %}
     </ul>
     <div class="container">
         {% block body %}{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Candidat;
+use App\Entity\User;
 use App\Form\CandidatType;
 use App\Repository\CandidatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,12 +32,13 @@ class CandidatController extends AbstractController
     public function new(Request $request, CandidatRepository $candidatRepository): Response
     {
         $candidat = new Candidat();
+        $candidat->setUser($this->getUser());
         $form = $this->createForm(CandidatType::class, $candidat);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $candidatRepository->add($candidat);
-            return $this->redirectToRoute('app_candidat_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_candidat_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('candidat/new.html.twig', [
@@ -48,10 +50,16 @@ class CandidatController extends AbstractController
     /**
      * @Route("/{id}", name="app_candidat_show", methods={"GET"})
      */
-    public function show(Candidat $candidat): Response
+    public function show(User $user): Response
     {
+        if($user->getCandidat()) {
+            $candidat = $user->getCandidat();
+        } else {
+            $candidat = null;
+        }
         return $this->render('candidat/show.html.twig', [
             'candidat' => $candidat,
+            'user'=>$user
         ]);
     }
 

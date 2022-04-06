@@ -31,12 +31,13 @@ class ExperienceController extends AbstractController
     public function new(Request $request, ExperienceRepository $experienceRepository): Response
     {
         $experience = new Experience();
+        $experience->setCandidat($this->getUser()->getCandidat());
         $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $experienceRepository->add($experience);
-            return $this->redirectToRoute('app_experience_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('experience/new.html.twig', [
@@ -65,7 +66,7 @@ class ExperienceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $experienceRepository->add($experience);
-            return $this->redirectToRoute('app_experience_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('experience/edit.html.twig', [
@@ -83,6 +84,6 @@ class ExperienceController extends AbstractController
             $experienceRepository->remove($experience);
         }
 
-        return $this->redirectToRoute('app_experience_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

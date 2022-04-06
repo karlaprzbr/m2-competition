@@ -3,14 +3,25 @@
 {% block title %}Candidat{% endblock %}
 
 {% block body %}
-    <h1>Candidat</h1>
-
+    <h1>Mon compte</h1>
+    {% if app.user %}
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ candidat.id }}</td>
+                <th>Adresse mail</th>
+                <td>{{ app.user.email }}</td>
             </tr>
+        </tbody>
+    </table>
+    {% endif %}
+
+    <div class="d-flex justify-content-between">
+        <h1>Mes informations</h1>
+        <a href="{{ candidat ? path('app_candidat_edit', {id:candidat.id}) : path('app_candidat_new') }}" class="btn btn-primary">Modifier mes informations</a>
+    </div>
+    {% if candidat %}
+    <table class="table">
+        <tbody>
             <tr>
                 <th>Nom</th>
                 <td>{{ candidat.nom }}</td>
@@ -69,10 +80,33 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_candidat_index') }}">back to list</a>
-
-    <a href="{{ path('app_candidat_edit', {'id': candidat.id}) }}">edit</a>
-
+    <div class="d-flex justify-content-between">
+        <h1>Mes expériences</h1>
+        <a href="{{ path('app_experience_new') }}" class="btn btn-primary">Ajouter une expérience</a>
+    </div>
+    {% if candidat.experiences %}
+        {% for experience in candidat.experiences %}
+            <div class="card">
+                <h5 class="card-title">{{ experience.poste }}</h5>
+                <a href="{{ path('app_experience_edit', {id:experience.id}) }}">Modifier</a>
+                <p class="card-text">{{ experience.description }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="d-flex justify-content-between">
+        <h1>Mes diplômes</h1>
+        <a href="{{ path('app_diplome_new') }}" class="btn btn-primary">Ajouter un diplôme</a>
+    </div>
+    {% if candidat.diplomes %}
+        {% for diplome in candidat.diplomes %}
+            <div class="card">
+                <h5 class="card-title">{{ diplome.titre }}</h5>
+                <a href="{{ path('app_diplome_edit', {id:diplome.id}) }}">Modifier</a>
+                <p class="card-text">{{ diplome.description }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
     {{ include('candidat/_delete_form.html.twig') }}
+    {% endif %}
+
 {% endblock %}

@@ -5,6 +5,10 @@ namespace App\Form;
 use App\Entity\Diplome;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DiplomeType extends AbstractType
@@ -12,12 +16,23 @@ class DiplomeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('niveau')
+            ->add('niveau', ChoiceType::class, [
+                'choices'=>[
+                    'Baccalauréat'=>'Baccalauréat',
+                    'Bac+2'=>'Bac+2',
+                    'Bac+3'=>'Bac+3',
+                    'Bac+5'=>'Bac+5'
+                ]
+            ])
             ->add('titre')
             ->add('description')
-            ->add('dateDebut')
-            ->add('dateFin')
-            ->add('candidat')
+            ->add('dateDebut', DateType::class, [
+                'widget'=>'single_text'
+            ])
+            ->add('dateFin', DateType::class, [
+                'widget'=>'single_text'
+            ])
+            // ->add('candidat')
         ;
     }
 
