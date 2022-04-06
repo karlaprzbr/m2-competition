@@ -23,7 +23,6 @@
             <a class="nav-link active text-white" aria-current="page" href="#">RANDSTAD</a>
         </li>
         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-            {{ dump('je passe ici') }}
             <li class="nav-item">
                 <a class="nav-link text-white" href="{{ path('login') }}">Connexion</a>
             </li>

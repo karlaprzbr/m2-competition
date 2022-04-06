@@ -13,7 +13,7 @@ class EntrepriseType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('user')
+            // ->add('user')
         ;
     }
 

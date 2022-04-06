@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
+use App\Entity\User;
 use App\Form\EntrepriseType;
 use App\Repository\EntrepriseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,12 +32,13 @@ class EntrepriseController extends AbstractController
     public function new(Request $request, EntrepriseRepository $entrepriseRepository): Response
     {
         $entreprise = new Entreprise();
+        $entreprise->setUser($this->getUser());
         $form = $this->createForm(EntrepriseType::class, $entreprise);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entrepriseRepository->add($entreprise);
-            return $this->redirectToRoute('app_entreprise_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_entreprise_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('entreprise/new.html.twig', [
@@ -48,10 +50,16 @@ class EntrepriseController extends AbstractController
     /**
      * @Route("/{id}", name="app_entreprise_show", methods={"GET"})
      */
-    public function show(Entreprise $entreprise): Response
+    public function show(User $user): Response
     {
+        if($user->getEntreprise()) {
+            $entreprise = $user->getEntreprise();
+        } else {
+            $entreprise = null;
+        }
         return $this->render('entreprise/show.html.twig', [
             'entreprise' => $entreprise,
+            'user'=>$user
         ]);
     }
 
@@ -65,7 +73,7 @@ class EntrepriseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entrepriseRepository->add($entreprise);
-            return $this->redirectToRoute('app_entreprise_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_entreprise_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('entreprise/edit.html.twig', [
@@ -83,6 +91,6 @@ class EntrepriseController extends AbstractController
             $entrepriseRepository->remove($entreprise);
         }
 
-        return $this->redirectToRoute('app_entreprise_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_entreprise_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

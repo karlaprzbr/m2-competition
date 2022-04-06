@@ -31,12 +31,13 @@ class OffreController extends AbstractController
     public function new(Request $request, OffreRepository $offreRepository): Response
     {
         $offre = new Offre();
+        $offre->setEntreprise($this->getUser()->getEntreprise());
         $form = $this->createForm(OffreType::class, $offre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $offreRepository->add($offre);
-            return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_entreprise_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('offre/new.html.twig', [
@@ -65,7 +66,7 @@ class OffreController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $offreRepository->add($offre);
-            return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_entreprise_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('offre/edit.html.twig', [
@@ -83,6 +84,6 @@ class OffreController extends AbstractController
             $offreRepository->remove($offre);
         }
 
-        return $this->redirectToRoute('app_offre_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_entreprise_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

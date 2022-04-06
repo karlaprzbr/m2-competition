@@ -23,7 +23,7 @@ class OffreType extends AbstractType
             ->add('hardSkills')
             ->add('localisation')
             ->add('salaire')
-            ->add('entreprise')
+            // ->add('entreprise')
         ;
     }
 

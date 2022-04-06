@@ -3,24 +3,44 @@
 {% block title %}Entreprise{% endblock %}
 
 {% block body %}
-    <h1>Entreprise</h1>
-
+    <h1>Compte entreprise</h1>
+    {% if app.user %}
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ entreprise.id }}</td>
+                <th>Adresse mail</th>
+                <td>{{ app.user.email }}</td>
             </tr>
+        </tbody>
+    </table>
+    {% endif %}
+
+    <div class="d-flex justify-content-between">
+        <h1>Informations générales</h1>
+        <a href="{{ entreprise ? path('app_entreprise_edit', {id:entreprise.id}) : path('app_entreprise_new') }}" class="btn btn-primary">Modifier les informations</a>
+    </div>
+    {% if entreprise %}
+    <table class="table">
+        <tbody>
             <tr>
                 <th>Nom</th>
                 <td>{{ entreprise.nom }}</td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_entreprise_index') }}">back to list</a>
-
-    <a href="{{ path('app_entreprise_edit', {'id': entreprise.id}) }}">edit</a>
-
+    <div class="d-flex justify-content-between">
+        <h1>Les offres</h1>
+        <a href="{{ path('app_offre_new') }}" class="btn btn-primary">Ajouter une Offre</a>
+    </div>
+    {% if entreprise.offres %}
+        {% for offre in entreprise.offres %}
+            <div class="card">
+                <h5 class="card-title">{{ offre.titre }}</h5>
+                <a href="{{ path('app_offre_edit', {id:offre.id}) }}">Modifier</a>
+                <p class="card-text">{{ offre.description }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
     {{ include('entreprise/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}
