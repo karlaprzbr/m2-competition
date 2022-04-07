@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes offres reccommandées{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Mes offres reccommandées</h1>
+
+    {% for offre in offres %}
+        <div class="card border-0 shadow mb-4">
+            <div class="row">
+                <div class="col-10">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ offre.titre }} chez {{ offre.entreprise.nom }} <span class="badge rounded-pill bg-vert">{{ offre.taux|round }}%</span></h5>
+                        <p class="card-text">{{ offre.typeContrat }} - {{ offre.localisation }}</p>
+                        <p class="card-text">Publiée le {{ offre.datePublication ? offre.datePublication|date('d/m/Y') : '' }}</p>
+                        <div>
+                            {% for tag in offre.tags %}
+                                <span class="badge rounded-pill bg-bleu-gris">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 d-flex justify-content-center align-items-center">
+                    <a href="{{ path('app_offre_show', {id:offre.id}) }}" class="btn-bleu">Voir l'offre</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

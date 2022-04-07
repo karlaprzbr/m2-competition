@@ -6,6 +6,8 @@ use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\CandidatType;
 use App\Repository\CandidatRepository;
+use App\Repository\OffreRepository;
+use App\Service\Calculs;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -94,5 +96,21 @@ class CandidatController extends AbstractController
         }
 
         return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id}/mes-offres", name="mes_offres", methods={"GET"})
+     */
+    public function offres(Calculs $calculs, OffreRepository $offreRepository): Response
+    {
+        $candidat = $this->getUser()->getCandidat();
+        $offres = $offreRepository->findAll();
+        $offresMatch = $calculs->matching($candidat, $offres);
+        usort($offresMatch,function($first,$second){
+            return $first->taux < $second->taux;
+        });
+        return $this->render('candidat/offres.html.twig', [
+            'offres' => $offresMatch,
+        ]);
     }
 }

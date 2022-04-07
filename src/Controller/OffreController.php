@@ -24,9 +24,12 @@ class OffreController extends AbstractController
     {
         $candidat = $this->getUser()->getCandidat();
         $offres = $offreRepository->findAll();
-        $taux = $calculs->matching($candidat, $offres);
+        $offresMatch = $calculs->matching($candidat, $offres);
+        usort($offresMatch,function($first,$second){
+            return $first->taux < $second->taux;
+        });
         return $this->render('offre/index.html.twig', [
-            'offres' => $offreRepository->findAll(),
+            'offres' => $offresMatch,
         ]);
     }
 

@@ -1,0 +1,86 @@
+@import url('bootstrap.min.css');
+
+:root {
+    --rouge-fonce: #B94A48;
+    --rouge: #E74536;
+    --jaune: #FFB511;
+    --vert: #78BB0E;
+    --bleu-gris: #6BA5B4;
+    --bleu: #2175D9;
+    --bleu-fonce: #0F1941;
+    --blanc: #FFFFFF;
+}
+
+
+.text-bleu-fonce {
+    color: var(--bleu-fonce);
+}
+
+.titre-bleu {
+    color: var(--bleu);
+    font-weight: bold;
+}
+
+.titre-blanc {
+    color: var(--blanc);
+    font-weight: bold;
+}
+
+.lien-bleu-fonce {
+    color: var(--bleu-fonce);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.lien-jaune {
+    color: var(--jaune);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.bg-bleu {
+    background-color: var(--bleu);
+    color: var(--blanc);
+}
+
+.bg-bleu-fonce {
+    background-color: var(--bleu-fonce);
+    color: var(--blanc);
+}
+
+.bg-jaune {
+    background-color: var(--jaune);
+    color: var(--blanc);
+}
+
+.bg-bleu-gris {
+    background-color: var(--bleu-gris);
+    color: var(--blanc);
+}
+
+.bg-rouge {
+    background-color: var(--rouge);
+    color: var(--blanc);
+}
+
+.bg-vert {
+    background-color: var(--vert);
+    color: var(--blanc);
+}
+
+.btn-bleu {
+    border: 1px solid var(--bleu);
+    border-radius: 5px;
+    color: var(--bleu);
+    background-color: var(--blanc);
+    text-decoration: none;
+    padding: 5px;
+}
+
+p {
+    color: var(--bleu-fonce);
+}
+
+h1,h2,h3,h4,h5,h6 {
+    color: var(--bleu);
+}
