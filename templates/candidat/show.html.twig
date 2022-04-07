@@ -20,6 +20,7 @@
         <a href="{{ candidat ? path('app_candidat_edit', {id:candidat.id}) : path('app_candidat_new') }}" class="btn btn-primary">Modifier mes informations</a>
     </div>
     {% if candidat %}
+    <p>Taux de remplissage du profil : {{ taux|round }}%</p>
     <table class="table">
         <tbody>
             <tr>

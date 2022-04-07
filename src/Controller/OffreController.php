@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidat;
 use App\Entity\Offre;
 use App\Form\OffreType;
 use App\Repository\OffreRepository;
+use App\Service\Calculs;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,8 +20,11 @@ class OffreController extends AbstractController
     /**
      * @Route("/", name="app_offre_index", methods={"GET"})
      */
-    public function index(OffreRepository $offreRepository): Response
+    public function index(Calculs $calculs, OffreRepository $offreRepository): Response
     {
+        $candidat = $this->getUser()->getCandidat();
+        $offres = $offreRepository->findAll();
+        $taux = $calculs->matching($candidat, $offres);
         return $this->render('offre/index.html.twig', [
             'offres' => $offreRepository->findAll(),
         ]);

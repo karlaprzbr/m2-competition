@@ -33,7 +33,7 @@ class CandidatType extends AbstractType
                 'expanded'=>true
             ])
             ->add('experience')
-            ->add('competences')
+            // ->add('competences')
             ->add('softSkills', ChoiceType::class, [
                 'choices'=>[
                     'empathie'=>'empathie',
@@ -45,10 +45,41 @@ class CandidatType extends AbstractType
                 'multiple'=>true,
                 'expanded'=>true
             ])
-            ->add('hardSkills')
-            ->add('workView')
-            ->add('companyValues')
-            ->add('teamSpirit')
+            ->add('hardSkills', ChoiceType::class, [
+                'choices'=>[
+                    'Symfony'=>'Symfony',
+                    'CodeIgniter'=>'CodeIgniter',
+                    'Git'=>'Git',
+                    'React'=>'React',
+                    'Java'=>'Java'
+                ],
+                'multiple'=>true,
+                'expanded'=>true
+            ])
+            ->add('workView', ChoiceType::class, [
+                'choices'=>[
+                    'test1'=>'test1',
+                    'test2'=>'test2',
+                ],
+                'multiple'=>true,
+                'expanded'=>true
+            ])
+            ->add('companyValues', ChoiceType::class, [
+                'choices'=>[
+                    'RSE'=>'RSE',
+                    'Bien-être au travail'=>'Bien-être au travail',
+                ],
+                'multiple'=>true,
+                'expanded'=>true
+            ])
+            ->add('teamSpirit', ChoiceType::class, [
+                'choices'=>[
+                    'coopération'=>'coopération',
+                    'after work'=>'after work',
+                ],
+                'multiple'=>true,
+                'expanded'=>true
+            ])
             ->add('salaire')
             // ->add('user')
         ;

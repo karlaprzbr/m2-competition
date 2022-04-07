@@ -38,7 +38,7 @@ class CandidatController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $candidatRepository->add($candidat);
-            return $this->redirectToRoute('app_candidat_show', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('candidat/new.html.twig', [
@@ -50,16 +50,18 @@ class CandidatController extends AbstractController
     /**
      * @Route("/{id}", name="app_candidat_show", methods={"GET"})
      */
-    public function show(User $user): Response
+    public function show(User $user, CandidatRepository $candidatRepository): Response
     {
         if($user->getCandidat()) {
             $candidat = $user->getCandidat();
+            $taux = $candidatRepository->tauxDeRemplissage($candidat);
         } else {
             $candidat = null;
         }
         return $this->render('candidat/show.html.twig', [
             'candidat' => $candidat,
-            'user'=>$user
+            'user'=>$user,
+            'taux'=>$taux
         ]);
     }
 
@@ -73,7 +75,7 @@ class CandidatController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $candidatRepository->add($candidat);
-            return $this->redirectToRoute('app_candidat_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('candidat/edit.html.twig', [
@@ -91,6 +93,6 @@ class CandidatController extends AbstractController
             $candidatRepository->remove($candidat);
         }
 
-        return $this->redirectToRoute('app_candidat_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

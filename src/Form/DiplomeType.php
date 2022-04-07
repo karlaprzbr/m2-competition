@@ -18,10 +18,12 @@ class DiplomeType extends AbstractType
         $builder
             ->add('niveau', ChoiceType::class, [
                 'choices'=>[
-                    'Baccalauréat'=>'Baccalauréat',
-                    'Bac+2'=>'Bac+2',
-                    'Bac+3'=>'Bac+3',
-                    'Bac+5'=>'Bac+5'
+                    'CAP, BEP'=>3,
+                    'Baccaleuréat, Bac Pro, BP'=>4,
+                    'BTS, DUT, DEUG, DEUST'=>5,
+                    'Licence, LP, Bachelor'=>6,
+                    'Master, Dipôme d\'ingénieur'=>7,
+                    'Doctorat'=>8
                 ]
             ])
             ->add('titre')
@@ -32,7 +34,6 @@ class DiplomeType extends AbstractType
             ->add('dateFin', DateType::class, [
                 'widget'=>'single_text'
             ])
-            // ->add('candidat')
         ;
     }
 

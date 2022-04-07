@@ -45,6 +45,55 @@ class CandidatRepository extends ServiceEntityRepository
         }
     }
 
+    public function tauxDeRemplissage(Candidat $candidat)
+    {
+        $cpt = 0;
+        if($candidat->getNom() && $candidat->getPrenom()) {
+            $cpt++;
+        }
+        if($candidat->getTitre()) {
+            $cpt++;
+        }
+        if($candidat->getDescription()) {
+            $cpt++;
+        }
+        if($candidat->getDispo()) {
+            $cpt++;
+        }
+        if($candidat->getTypeContrat()) {
+            $cpt++;
+        }
+        if($candidat->getExperience()) {
+            $cpt++;
+        }
+        if($candidat->getSoftSkills()) {
+            $cpt++;
+        }
+        if($candidat->getHardSkills()) {
+            $cpt++;
+        }
+        if($candidat->getWorkView()) {
+            $cpt++;
+        }
+        if($candidat->getCompanyValues()) {
+            $cpt++;
+        }
+        if($candidat->getTeamSpirit()) {
+            $cpt++;
+        }
+        if($candidat->getSalaire()) {
+            $cpt++;
+        }
+        if($candidat->getExperiences()) {
+            $cpt++;
+        }
+        if($candidat->getDiplomes()) {
+            $cpt++;
+        }
+        $taux = $cpt/14*100;
+        return $taux;
+    }
+
     // /**
     //  * @return Candidat[] Returns an array of Candidat objects
     //  */
