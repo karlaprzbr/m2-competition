@@ -34,6 +34,11 @@ class Entreprise
      */
     private $offres;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->offres = new ArrayCollection();
@@ -94,6 +99,18 @@ class Entreprise
                 $offre->setEntreprise(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

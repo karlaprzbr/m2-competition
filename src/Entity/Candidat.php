@@ -105,6 +105,16 @@ class Candidat
      */
     private $diplomes;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateNaissance;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $localisation;
+
     public function __construct()
     {
         $this->experiences = new ArrayCollection();
@@ -352,6 +362,30 @@ class Candidat
                 $diplome->setCandidat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(?\DateTimeInterface $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
+    public function getLocalisation(): ?string
+    {
+        return $this->localisation;
+    }
+
+    public function setLocalisation(?string $localisation): self
+    {
+        $this->localisation = $localisation;
 
         return $this;
     }

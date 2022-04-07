@@ -20,16 +20,10 @@ class OffreController extends AbstractController
     /**
      * @Route("/", name="app_offre_index", methods={"GET"})
      */
-    public function index(Calculs $calculs, OffreRepository $offreRepository): Response
+    public function index(OffreRepository $offreRepository): Response
     {
-        $candidat = $this->getUser()->getCandidat();
-        $offres = $offreRepository->findAll();
-        $offresMatch = $calculs->matching($candidat, $offres);
-        usort($offresMatch,function($first,$second){
-            return $first->taux < $second->taux;
-        });
         return $this->render('offre/index.html.twig', [
-            'offres' => $offresMatch,
+            'offres' => $offreRepository->findAll(),
         ]);
     }
 

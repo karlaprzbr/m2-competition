@@ -15,9 +15,9 @@
     </table>
     {% endif %}
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-center">
         <h1>Mes informations</h1>
-        <a href="{{ candidat ? path('app_candidat_edit', {id:candidat.id}) : path('app_candidat_new') }}" class="btn btn-primary">Modifier mes informations</a>
+        <a href="{{ candidat ? path('app_candidat_edit', {id:candidat.id}) : path('app_candidat_new') }}" class="btn-bleu">Modifier mes informations</a>
     </div>
     {% if candidat %}
     <p>Taux de remplissage du profil : {{ taux|round }}%</p>
@@ -81,29 +81,45 @@
             </tr>
         </tbody>
     </table>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-center">
         <h1>Mes expériences</h1>
-        <a href="{{ path('app_experience_new') }}" class="btn btn-primary">Ajouter une expérience</a>
+        <a href="{{ path('app_experience_new') }}" class="btn-bleu">Ajouter une expérience</a>
     </div>
     {% if candidat.experiences %}
         {% for experience in candidat.experiences %}
-            <div class="card">
-                <h5 class="card-title">{{ experience.poste }}</h5>
-                <a href="{{ path('app_experience_edit', {id:experience.id}) }}">Modifier</a>
-                <p class="card-text">{{ experience.description }}</p>
+            <div class="card border-0 shadow mb-4">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ experience.poste }}</h5>
+                            <p class="card-text">{{ experience.description }}</p>
+                        </div>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <a href="{{ path('app_experience_edit', {id:experience.id}) }}" class="btn-bleu">Modifier</a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     {% endif %}
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-center">
         <h1>Mes diplômes</h1>
-        <a href="{{ path('app_diplome_new') }}" class="btn btn-primary">Ajouter un diplôme</a>
+        <a href="{{ path('app_diplome_new') }}" class="btn-bleu">Ajouter un diplôme</a>
     </div>
     {% if candidat.diplomes %}
         {% for diplome in candidat.diplomes %}
-            <div class="card">
-                <h5 class="card-title">{{ diplome.titre }}</h5>
-                <a href="{{ path('app_diplome_edit', {id:diplome.id}) }}">Modifier</a>
-                <p class="card-text">{{ diplome.description }}</p>
+            <div class="card border-0 shadow mb-4">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ diplome.titre }}</h5>
+                            <p class="card-text">{{ diplome.description }}</p>
+                        </div>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <a href="{{ path('app_diplome_edit', {id:diplome.id}) }}" class="btn-bleu">Modifier</a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     {% endif %}

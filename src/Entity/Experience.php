@@ -43,6 +43,11 @@ class Experience
      */
     private $dateFin;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $entreprise;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +109,18 @@ class Experience
     public function setDateFin(?\DateTimeInterface $dateFin): self
     {
         $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?string
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?string $entreprise): self
+    {
+        $this->entreprise = $entreprise;
 
         return $this;
     }

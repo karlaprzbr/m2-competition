@@ -12,32 +12,32 @@
 
   </head>
   <body>
-    <ul class="nav shadow-sm p-4 justify-content-center">
+    <ul class="nav shadow-sm p-4 align-items-center bg-bleu-fonce">
         <li class="nav-item">
-            <a class="nav-link lien-bleu-fonce" aria-current="page" href="{{ path('app_home') }}">RANDSTAD</a>
+            <a class="nav-link lien-blanc" aria-current="page" href="{{ path('app_home') }}"><img src="{{ asset('assets/img/neo.png') }}" style="height:50px;"></a>
         </li>
         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
             <li class="nav-item">
-                <a class="nav-link lien-bleu-fonce" href="{{ path('login') }}">Connexion</a>
+                <a class="nav-link lien-blanc" href="{{ path('login') }}">Connexion</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link lien-bleu-fonce" href="{{ path('register_index') }}">Inscription</a>
+                <a class="nav-link lien-blanc" href="{{ path('register_index') }}">Inscription</a>
             </li>
         {% elseif is_granted('ROLE_CAN') %}
             <li class="nav-item">
-                <a class="nav-link lien-bleu-fonce" href="{{ path('app_candidat_show', {id:app.user.id}) }}">Espace candidat</a>
+                <a class="nav-link lien-blanc" href="{{ path('app_candidat_show', {id:app.user.id}) }}">Espace candidat</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link lien-bleu-fonce" href="{{ path('mes_offres', {id:app.user.id}) }}">Mes offres</a>
+                <a class="nav-link lien-blanc" href="{{ path('mes_offres', {id:app.user.id}) }}">Mes offres</a>
             </li>
         {% elseif is_granted('ROLE_ENT') %}
             <li class="nav-item">
-                <a class="nav-link lien-bleu-fonce" href="{{ path('app_entreprise_show', {id:app.user.id}) }}">Espace entreprise</a>
+                <a class="nav-link lien-blanc" href="{{ path('app_entreprise_show', {id:app.user.id}) }}">Espace entreprise</a>
             </li>
         {% endif %}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <li class="nav-item">
-                <a class="nav-link lien-bleu-fonce" href="{{ path('app_logout') }}">Déconnexion</a>
+                <a class="nav-link btn-blanc" href="{{ path('app_logout') }}">Déconnexion</a>
             </li>
         {% endif %}
     </ul>

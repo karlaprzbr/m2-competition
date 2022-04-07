@@ -48,6 +48,11 @@ class Diplome
      */
     private $dateFin;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $eccole;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +126,18 @@ class Diplome
     public function setDateFin(?\DateTimeInterface $dateFin): self
     {
         $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    public function getEccole(): ?string
+    {
+        return $this->eccole;
+    }
+
+    public function setEccole(?string $eccole): self
+    {
+        $this->eccole = $eccole;
 
         return $this;
     }

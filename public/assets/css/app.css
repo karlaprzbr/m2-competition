@@ -29,13 +29,17 @@
 .lien-bleu-fonce {
     color: var(--bleu-fonce);
     text-decoration: none;
-    font-weight: bold;
 }
 
 .lien-jaune {
     color: var(--jaune);
     text-decoration: none;
     font-weight: bold;
+}
+
+.lien-blanc {
+    color: var(--blanc);
+    text-decoration: none;
 }
 
 .bg-bleu {
@@ -73,6 +77,24 @@
     border-radius: 5px;
     color: var(--bleu);
     background-color: var(--blanc);
+    text-decoration: none;
+    padding: 5px;
+}
+
+.btn-rouge {
+    border: 1px solid var(--rouge);
+    border-radius: 5px;
+    color: var(--rouge);
+    background-color: var(--blanc);
+    text-decoration: none;
+    padding: 5px;
+}
+
+.btn-blanc {
+    border: 1px solid var(--blanc);
+    border-radius: 5px;
+    color: var(--blanc);
+    /* background-color: var(--blanc); */
     text-decoration: none;
     padding: 5px;
 }

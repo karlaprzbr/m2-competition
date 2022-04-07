@@ -1,4 +1,26 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.titre) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.datePublication) }}
+    {{ form_row(form.dateDebut) }}
+    {{ form_row(form.typeContrat) }}
+    {{ form_row(form.niveauDiplome) }}
+    {{ form_row(form.experience) }}
+    <div class="row">
+    <div class="col-6">
+        <label>Soft skills</label></br>
+        {% for skill in form.softSkills %}
+            {{ form_widget(skill) }} {{ form_label(skill) }}</br>
+        {% endfor %}
+    </div>
+    <div class="col-6">
+    <label>Hard skills</label></br>
+    {% for skill in form.hardSkills %}
+        {{ form_widget(skill) }} {{ form_label(skill) }}</br>
+    {% endfor %}
+    </div>
+    </div>
+    {{ form_row(form.localisation) }}
+    {{ form_row(form.salaire) }}
+    <button class="btn-bleu w-100 mt-2">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

@@ -17,7 +17,7 @@
 
     <div class="d-flex justify-content-between">
         <h1>Informations générales</h1>
-        <a href="{{ entreprise ? path('app_entreprise_edit', {id:entreprise.id}) : path('app_entreprise_new') }}" class="btn btn-primary">Modifier les informations</a>
+        <a href="{{ entreprise ? path('app_entreprise_edit', {id:entreprise.id}) : path('app_entreprise_new') }}" class="btn btn-bleu">Modifier les informations</a>
     </div>
     {% if entreprise %}
     <table class="table">
@@ -30,7 +30,7 @@
     </table>
     <div class="d-flex justify-content-between">
         <h1>Les offres</h1>
-        <a href="{{ path('app_offre_new') }}" class="btn btn-primary">Ajouter une Offre</a>
+        <a href="{{ path('app_offre_new') }}" class="btn btn-bleu">Ajouter une Offre</a>
     </div>
     {% if entreprise.offres %}
         {% for offre in entreprise.offres %}
