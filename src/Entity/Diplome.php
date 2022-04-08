@@ -51,7 +51,7 @@ class Diplome
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $eccole;
+    private $ecole;
 
     public function getId(): ?int
     {
@@ -130,14 +130,14 @@ class Diplome
         return $this;
     }
 
-    public function getEccole(): ?string
+    public function getEcole(): ?string
     {
-        return $this->eccole;
+        return $this->ecole;
     }
 
-    public function setEccole(?string $eccole): self
+    public function setEcole(?string $ecole): self
     {
-        $this->eccole = $eccole;
+        $this->ecole = $ecole;
 
         return $this;
     }

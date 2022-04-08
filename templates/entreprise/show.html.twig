@@ -15,29 +15,36 @@
     </table>
     {% endif %}
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between align-items-center">
         <h1>Informations générales</h1>
         <a href="{{ entreprise ? path('app_entreprise_edit', {id:entreprise.id}) : path('app_entreprise_new') }}" class="btn btn-bleu">Modifier les informations</a>
     </div>
     {% if entreprise %}
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ entreprise.nom }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="d-flex justify-content-between">
+    <div class="card border-0 shadow mb-4">
+        <div class="card-body">
+            <p class="card-title fw-bold">{{ entreprise.nom }}</p>
+            <p class="card-text">{{ entreprise.description }}</p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
         <h1>Les offres</h1>
         <a href="{{ path('app_offre_new') }}" class="btn btn-bleu">Ajouter une Offre</a>
     </div>
     {% if entreprise.offres %}
         {% for offre in entreprise.offres %}
-            <div class="card">
-                <h5 class="card-title">{{ offre.titre }}</h5>
-                <a href="{{ path('app_offre_edit', {id:offre.id}) }}">Modifier</a>
-                <p class="card-text">{{ offre.description }}</p>
+            <div class="card border-0 shadow mb-4">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="card-body">
+                            <p class="card-title fw-bold">{{ offre.titre }}</p>
+                            <p class="card-text">{{ offre.typeContrat }}</p>
+                            <p class="card-text">{{ offre.description }}</p>
+                        </div>
+                    </div>
+                    <div class="col-2 d-flex justify-content-center align-items-center">
+                        <a href="{{ path('app_offre_edit', {id:offre.id}) }}" class="btn-bleu">Modifier</a>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     {% endif %}

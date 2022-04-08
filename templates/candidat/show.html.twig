@@ -16,71 +16,39 @@
     {% endif %}
 
     <div class="d-flex justify-content-between align-items-center">
-        <h1>Mes informations</h1>
+        <h1>
+            Mes informations 
+            {% if candidat %}
+                <span class="badge rounded-pill bg-vert">{{ taux|round }}%</span>
+            {% else %}
+                <span class="badge rounded-pill bg-rouge">0%</span>
+            {% endif %}
+        </h1>
         <a href="{{ candidat ? path('app_candidat_edit', {id:candidat.id}) : path('app_candidat_new') }}" class="btn-bleu">Modifier mes informations</a>
     </div>
     {% if candidat %}
-    <p>Taux de remplissage du profil : {{ taux|round }}%</p>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ candidat.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ candidat.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ candidat.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ candidat.description }}</td>
-            </tr>
-            <tr>
-                <th>Dispo</th>
-                <td>{{ candidat.dispo ? candidat.dispo|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>TypeContrat</th>
-                <td>{{ candidat.typeContrat ? candidat.typeContrat|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Experience</th>
-                <td>{{ candidat.experience }}</td>
-            </tr>
-            <tr>
-                <th>Competences</th>
-                <td>{{ candidat.competences ? candidat.competences|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>SoftSkills</th>
-                <td>{{ candidat.softSkills ? candidat.softSkills|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>HardSkills</th>
-                <td>{{ candidat.hardSkills ? candidat.hardSkills|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>WorkView</th>
-                <td>{{ candidat.workView ? candidat.workView|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>CompanyValues</th>
-                <td>{{ candidat.companyValues ? candidat.companyValues|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>TeamSpirit</th>
-                <td>{{ candidat.teamSpirit ? candidat.teamSpirit|join(', ') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Salaire</th>
-                <td>{{ candidat.salaire }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card border-0 shadow mb-4">
+        <div class="card-body">
+            <p class="card-title fw-bold">{{ candidat.nom ~ " " ~ candidat.prenom ~ " - " ~ candidat.titre }}</p>
+            <p class="card-text">{{ candidat.experience > 1 ? candidat.experience ~ " ans d'expérience" : candidat.experience ~ " an d'expérience" }}</p>
+            <p class="card-text fst-italic">"{{ candidat.description }}"</p>
+            <p class="card-text">{{ candidat.dispo ? 'Disponible à partir du ' ~ candidat.dispo|date('d/m/Y') : '' }}, en {% for contrat in candidat.typeContrat %}{{ contrat ~ ' ' }}{% endfor %}</p>
+            <div class="row">
+                <div class="col-6">
+                    <p>Soft skills</p>
+                    {% for skill in candidat.softSkills %}
+                        <span class="badge rounded-pill bg-bleu-gris">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                <div class="col-6">
+                    <p>Hard skills</p>
+                    {% for skill in candidat.hardSkills %}
+                        <span class="badge rounded-pill bg-bleu-gris">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="d-flex justify-content-between align-items-center">
         <h1>Mes expériences</h1>
         <a href="{{ path('app_experience_new') }}" class="btn-bleu">Ajouter une expérience</a>
@@ -91,8 +59,9 @@
                 <div class="row">
                     <div class="col-10">
                         <div class="card-body">
-                            <h5 class="card-title">{{ experience.poste }}</h5>
-                            <p class="card-text">{{ experience.description }}</p>
+                            <p class="card-title fw-bold">{{ experience.poste }}</p>
+                            <p class="card-text">
+                            {{ experience.entreprise }} | {{ experience.dateDebut ? experience.dateDebut|date("m/Y") : "" }} - {{ experience.dateFin ? experience.dateFin|date("m/Y") : "" }}</p>
                         </div>
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">
@@ -112,8 +81,9 @@
                 <div class="row">
                     <div class="col-10">
                         <div class="card-body">
-                            <h5 class="card-title">{{ diplome.titre }}</h5>
-                            <p class="card-text">{{ diplome.description }}</p>
+                            <p class="card-title fw-bold">{{ diplome.titre }}</p>
+                            <p class="card-text">
+                            {{ diplome.ecole }} | {{ diplome.dateDebut ? diplome.dateDebut|date("m/Y") : "" }} - {{ diplome.dateFin ? diplome.dateFin|date("m/Y") : "" }}</p>
                         </div>
                     </div>
                     <div class="col-2 d-flex justify-content-center align-items-center">

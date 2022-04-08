@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ experience.id }}</td>
-            </tr>
-            <tr>
                 <th>Poste</th>
                 <td>{{ experience.poste }}</td>
             </tr>
@@ -29,8 +25,6 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_experience_index') }}">back to list</a>
 
     <a href="{{ path('app_experience_edit', {'id': experience.id}) }}">edit</a>
 

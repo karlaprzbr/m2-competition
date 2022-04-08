@@ -37,7 +37,7 @@ class DiplomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $diplomeRepository->add($diplome);
-            return $this->redirectToRoute('app_diplome_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('diplome/new.html.twig', [
@@ -66,7 +66,7 @@ class DiplomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $diplomeRepository->add($diplome);
-            return $this->redirectToRoute('app_diplome_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('diplome/edit.html.twig', [
@@ -84,6 +84,6 @@ class DiplomeController extends AbstractController
             $diplomeRepository->remove($diplome);
         }
 
-        return $this->redirectToRoute('app_diplome_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_candidat_show', ['id'=>$this->getUser()->getId()], Response::HTTP_SEE_OTHER);
     }
 }
